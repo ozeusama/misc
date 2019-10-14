@@ -1,26 +1,24 @@
 #pragma once
 
-#include <stdio.h>
-
 #ifdef DEBUG
-#define dprint(fmt, ...) fprintf(stderr, __FILE__ ":%d %s: " fmt, __LINE__, __func__, ##__VA_ARGS__)
-#else
-#define dprint(fmt, ...) \
-    do {                 \
-    } while (0)
-#endif
-
+#include <stdio.h>
+#define dprint(fmt, ...)                                                         \
+    fprintf(stderr, __FILE__ ":%s:%d> " fmt, __func__, __LINE__, ##__VA_ARGS__); \
+    fflush(stderr)
 #include <assert.h>
-
 #define aprint(x, fmt, ...)                                                          \
     if (!(x)) {                                                                      \
-        fprintf(stderr, __FILE__ ":%d %s: " fmt, __LINE__, __func__, ##__VA_ARGS__); \
+        fprintf(stderr, __FILE__ ":%s:%d> " fmt, __func__, __LINE__, ##__VA_ARGS__); \
+        fflush(stderr);                                                              \
         assert(x);                                                                   \
     }
+#else
+#define dprint(fmt, ...) do {} while (0)
+#define aprint(x, fmt, ...) do {} while (0)
+#endif
 
 #include <float.h>
 #include <stdint.h>
-
 
 typedef uint8_t u8;
 typedef uint16_t u16;

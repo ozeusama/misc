@@ -19,13 +19,6 @@ pool pool_init(size_t num_elems, size_t elem_size)
     for (size_t i = 0; i < num_elems - 1; i++) {
         ((pool_elem *)(p.a + elem_size * i))->next = (pool_elem *)(p.a + elem_size * (i + 1));
     }
-    // void *temp_ptr = p.a;
-    // void *temp_ptr2 = temp_ptr;
-    // for (size_t i = 0; i < num_elems - 1; i++) {
-    //     temp_ptr = ((pool_elem *)temp_ptr)->next;
-    //     printf("%p: %d\n", temp_ptr2, temp_ptr - temp_ptr2);
-    //     temp_ptr2 = temp_ptr;
-    // }
     return p;
 }
 
